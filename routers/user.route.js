@@ -6,4 +6,6 @@ userRoute.post("/login", userController.loginCtrl);
 userRoute.get("/user/:id", userController.findUserByid);
 userRoute.patch("/user/:id", userController.updateUsers);
 userRoute.delete("/user/:id", userController.deleteUsers);
+userRoute.post("/forgot", userController.forgotPasswords);
+
 module.exports = userRoute;

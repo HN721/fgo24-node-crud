@@ -66,7 +66,16 @@ exports.deleteUser = (id) => {
     return user.splice(found, 1)[0];
   }
 };
-exports.forgotPassword = (email) => {};
+exports.forgotPassword = (email) => {
+  const otp = generateToken();
+  const emailFound = user.find((u) => u.email === email);
+  if (emailFound) {
+    console.log(otp);
+    return otp;
+  } else {
+    return null;
+  }
+};
 
 function generateToken() {
   const characters = "pqrstuvwxyz0123456789";

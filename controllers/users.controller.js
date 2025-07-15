@@ -5,6 +5,7 @@ const {
   findByid,
   updateUser,
   deleteUser,
+  forgotPassword,
 } = require("../models/users.model");
 exports.register = (req, res) => {
   const { email, password } = req.body;
@@ -95,5 +96,20 @@ exports.deleteUsers = (req, res) => {
   return res.status(200).json({
     success: false,
     message: `Success Delete Users ${result.email}`,
+  });
+};
+exports.forgotPasswords = (req, res) => {
+  const { email } = req.body;
+  const results = forgotPassword(email);
+
+  if (!results) {
+    return res.status(400).json({
+      success: false,
+      message: `Email Not Founds`,
+    });
+  }
+  return res.status(200).json({
+    success: false,
+    message: `Your OTP ${results}`,
   });
 };
