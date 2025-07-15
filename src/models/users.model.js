@@ -1,18 +1,20 @@
-const user = [];
+const user = [
+  {
+    id: 1000,
+    email: "hosea@gmail.com",
+    password: "12345",
+  },
+];
 const token = [];
 exports.finduserEmail = (email) => {
   const emailFound = user.find((u) => u.email === email);
   if (emailFound) {
-    return null;
+    return emailFound;
   }
-  return email;
+  return null;
 };
-exports.createUser = (email, password) => {
-  const emailFound = user.find((u) => u.email === email);
-  if (emailFound) {
-    return null;
-  }
 
+exports.createUser = (email, password) => {
   const data = {
     id: Math.floor(Math.random() * 100 + 1),
     email,
@@ -22,8 +24,15 @@ exports.createUser = (email, password) => {
   console.log(user);
   return "Success Create user";
 };
-exports.getAlluser = () => {
-  return user;
+exports.getAlluser = (search) => {
+  const filteredData = user.filter((item) =>
+    item.email.toLowerCase().includes(search)
+  );
+  if (filteredData) {
+    return filteredData;
+  } else {
+    return user;
+  }
 };
 exports.login = (email, password) => {
   const found = user.filter(
@@ -86,3 +95,4 @@ function generateToken() {
   }
   return result;
 }
+exports.resetPassword = newPassword = {};

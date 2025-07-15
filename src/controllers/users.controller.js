@@ -6,24 +6,27 @@ const {
   updateUser,
   deleteUser,
   forgotPassword,
+  finduserEmail,
 } = require("../models/users.model");
 exports.register = (req, res) => {
   const { email, password } = req.body;
-  const result = createUser(email, password);
-  if (!result) {
+  const found = finduserEmail(email);
+  if (found) {
     return res.status(400).json({
       success: false,
       message: "Email Already EXITS",
     });
   }
-
+  const result = createUser(email, password);
   res.status(201).json({
     success: true,
     message: result,
   });
 };
 exports.getAllusers = (req, res) => {
-  const result = getAlluser();
+  const search = req.query.search ? req.query.search.toLowerCase() : "";
+
+  const result = getAlluser(search);
   res.status(201).json({
     success: true,
     message: "Sucess Get User",
