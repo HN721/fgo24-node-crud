@@ -3,6 +3,7 @@ const {
   getAlluser,
   login,
   findByid,
+  updateUser,
 } = require("../models/users.model");
 exports.register = (req, res) => {
   const { email, password } = req.body;
@@ -55,6 +56,29 @@ exports.findUserByid = (req, res) => {
   return res.status(200).json({
     success: false,
     message: "Success Get detail User",
+    results: result,
+  });
+};
+exports.updateUsers = (req, res) => {
+  const { email, password } = req.body;
+  const { id } = req.params;
+
+  if (!email && !password) {
+    return res.status(400).json({
+      success: false,
+      message: `email,password cannot empty`,
+    });
+  }
+  const result = updateUser(id, email, password);
+  if (!result) {
+    return res.status(400).json({
+      success: false,
+      message: `cannot update`,
+    });
+  }
+  return res.status(200).json({
+    success: true,
+    message: `Sucessfully Update User`,
     results: result,
   });
 };
