@@ -30,6 +30,7 @@ exports.getAllusers = (req, res) => {
   res.status(201).json({
     success: true,
     message: "Sucess Get User",
+    pageInfo: 1,
     results: result,
   });
 };
