@@ -62,16 +62,10 @@ exports.findUserByid = (req, res) => {
   });
 };
 exports.updateUsers = (req, res) => {
-  const { email, password } = req.body;
+  const { fullname, phone } = req.body;
   const { id } = req.params;
 
-  if (!email && !password) {
-    return res.status(400).json({
-      success: false,
-      message: `email,password cannot empty`,
-    });
-  }
-  const result = updateUser(id, email, password);
+  const result = updateUser(id, fullname, phone);
   if (!result) {
     return res.status(500).json({
       success: false,

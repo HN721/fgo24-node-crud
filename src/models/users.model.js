@@ -45,7 +45,7 @@ exports.findByid = (id) => {
     return null;
   }
 };
-exports.updateUser = (id, email, password) => {
+exports.updateUser = (id, fullname, phone) => {
   const userId = parseInt(id);
   const found = user.findIndex((u) => u.id === userId);
   if (found === -1) {
@@ -53,8 +53,8 @@ exports.updateUser = (id, email, password) => {
   }
   user[found] = {
     ...user[found],
-    email,
-    password,
+    fullname,
+    phone,
   };
   return user[found];
 };
