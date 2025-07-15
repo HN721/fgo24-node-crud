@@ -1,4 +1,5 @@
 const user = [];
+const token = [];
 exports.finduserEmail = (email) => {
   const emailFound = user.find((u) => u.email === email);
   if (emailFound) {

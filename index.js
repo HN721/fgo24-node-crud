@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 app.use(express.urlencoded());
 app.use(express.json());
-app.use("/", require("./routers/index"));
+app.use("/", require("./src/routers/index"));
 
 app.get("/", (req, res) => {
   return res.json({
