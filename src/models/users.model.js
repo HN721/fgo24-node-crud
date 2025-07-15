@@ -26,6 +26,7 @@ const user = [
   },
 ];
 const token = [];
+console.log(token);
 exports.finduserEmail = (email) => {
   const emailFound = user.find((u) => u.email === email);
   if (emailFound) {
@@ -103,7 +104,9 @@ exports.forgotPassword = (email) => {
   const otp = generateToken();
   const emailFound = user.find((u) => u.email === email);
   if (emailFound) {
-    console.log(otp);
+    token.push(otp);
+    console.log(token);
+
     return otp;
   } else {
     return null;
@@ -118,4 +121,20 @@ function generateToken() {
   }
   return result;
 }
-exports.resetPassword = newPassword = {};
+exports.resetPassword = (id, newPassword) => {
+  const userId = parseInt(id);
+  const found = user.find((u) => u.id === userId);
+  console.log(found);
+  if (found) {
+    const data = (found.password = newPassword);
+    return data;
+  }
+  return null;
+};
+exports.checkToken = (tokens) => {
+  const match = token.find((token) => token === tokens);
+  if (!match) {
+    return null;
+  }
+  return match;
+};
