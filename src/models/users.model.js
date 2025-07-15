@@ -4,6 +4,26 @@ const user = [
     email: "hosea@gmail.com",
     password: "12345",
   },
+  {
+    id: 1001,
+    email: "beni@gmail.com",
+    password: "12345",
+  },
+  {
+    id: 1002,
+    email: "angeta@gmail.com",
+    password: "12345",
+  },
+  {
+    id: 1003,
+    email: "frida@gmail.com",
+    password: "12345",
+  },
+  {
+    id: 1004,
+    email: "bjorn@gmail.com",
+    password: "12345",
+  },
 ];
 const token = [];
 exports.finduserEmail = (email) => {
@@ -24,15 +44,18 @@ exports.createUser = (email, password) => {
   console.log(user);
   return "Success Create user";
 };
-exports.getAlluser = (search) => {
+exports.getAlluser = (search, limit, page) => {
+  const startIndex = (page - 1) * limit;
+  const endIndex = startIndex + limit;
+
   const filteredData = user.filter((item) =>
     item.email.toLowerCase().includes(search)
   );
-  if (filteredData) {
-    return filteredData;
-  } else {
-    return user;
-  }
+  const paginate = filteredData.slice(startIndex, endIndex);
+  return {
+    data: paginate,
+    totalData: filteredData.length,
+  };
 };
 exports.login = (email, password) => {
   const found = user.filter(

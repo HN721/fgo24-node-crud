@@ -25,13 +25,21 @@ exports.register = (req, res) => {
 };
 exports.getAllusers = (req, res) => {
   const search = req.query.search ? req.query.search.toLowerCase() : "";
+  const { page = 1, limit = 5 } = req.query;
+  const pageInt = parseInt(page);
+  const limitInt = parseInt(limit);
 
-  const result = getAlluser(search);
+  const { data, totalData } = getAlluser(search, limit, page);
   res.status(201).json({
     success: true,
     message: "Sucess Get User",
-    pageInfo: 1,
-    results: result,
+    pageInfo: {
+      page: pageInt,
+      limit: limitInt,
+      totalData,
+      totalPage: Math.ceil(totalData / limit),
+    },
+    results: data,
   });
 };
 exports.loginCtrl = (req, res) => {
